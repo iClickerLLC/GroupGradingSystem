@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 import java.util.*;
 
 public class Main {
-
+//test add comment
 
 	private static ArrayList<Student> students = new ArrayList<>();
 	private static int numberOfAssignments;
