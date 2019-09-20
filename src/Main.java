@@ -9,6 +9,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
+		// This is a test push
+		
 		// Instructor sets parameters by adding students to the group and setting the number of assignments
 		addStudents();
 		
