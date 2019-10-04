@@ -9,37 +9,107 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		// This is a test push
+		ArrayList<Login> logins = new ArrayList<>();
 		
-		// Instructor sets parameters by adding students to the group and setting the number of assignments
-		addStudents();
+		int input = 0;
+		int id = 0;
 		
-		// Notify instructor of project creation
-		JOptionPane.showMessageDialog(null, "The group project has been created");
-		
-		// Notify students of group project creation
-		notifyStudents();
-		
-		// Prompt students for real-time feedback
-		ArrayList<Double> scoreForEach = promptForFeedback(students);
-		
-		JOptionPane.showMessageDialog(null, "Prompting students for end-of-project feedback");
-		
-		System.out.println();
-		
-		// Prompt students for end-of-project feedback
-		ArrayList<Double> scoreForEach2 = promptForFeedback(students);
-		
-		System.out.println();
-		
-		// Display final score for each student
-		double score;
-		for (int i = 0; i < scoreForEach.size(); i++) {
-			score = (scoreForEach.get(i) + scoreForEach2.get(i)) / 2;			// 2 prompts
-			System.out.println("Score for " + students.get(i).getName() + ": " + score);
+		while(input != 3) {
+			
+			input = Integer.parseInt(JOptionPane.showInputDialog("Enter 1 to create a new user or 2 to login. Enter 3 to exit."));
+			
+			if (input == 1) {
+				
+				String username = JOptionPane.showInputDialog("Enter a username");
+				String password = JOptionPane.showInputDialog("Enter a password");
+				Login login = new Login(id, username, password);
+				id++;
+				
+				logins.add(login);
+				
+				for (int i = 0; i < logins.size(); i++) {
+					System.out.println(logins.get(i).getUsername());
+					System.out.println(logins.get(i).getPassword());
+					System.out.println(logins.get(i).getID());
+					System.out.println("\n");
+				}
+
+				
+			} else if (input == 2) {
+				
+				// Login
+				
+				String temp2 = null;
+				Boolean found = false;
+				Boolean success = false;
+				
+				while (success == false) {
+					
+					String temp = JOptionPane.showInputDialog("Enter your username to logjn");
+					
+					for (int i = 0; i < logins.size(); i++) {
+						if (temp.compareToIgnoreCase(logins.get(i).getUsername()) == 0) {
+							found = true;
+							temp2 = logins.get(i).getPassword();
+						} 
+					}
+					
+					if (found) {
+						String temp3 = JOptionPane.showInputDialog("Enter you password");
+						if (temp3.compareTo(temp2) == 0) {
+							JOptionPane.showMessageDialog(null, "You have logged in");
+							success = true;
+						} else {
+							JOptionPane.showMessageDialog(null, "Wrong password!");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Username not found");
+					}
+					
+				}
+				
+			}
+			
 		}
 		
-		System.exit(0);
+		
+		
+
+		
+		
+		
+		
+//		// This is a test push
+//		
+//		// Instructor sets parameters by adding students to the group and setting the number of assignments
+//		addStudents();
+//		
+//		// Notify instructor of project creation
+//		JOptionPane.showMessageDialog(null, "The group project has been created");
+//		
+//		// Notify students of group project creation
+//		notifyStudents();
+//		
+//		// Prompt students for real-time feedback
+//		ArrayList<Double> scoreForEach = promptForFeedback(students);
+//		
+//		JOptionPane.showMessageDialog(null, "Prompting students for end-of-project feedback");
+//		
+//		System.out.println();
+//		
+//		// Prompt students for end-of-project feedback
+//		ArrayList<Double> scoreForEach2 = promptForFeedback(students);
+//		
+//		System.out.println();
+//		
+//		// Display final score for each student
+//		double score;
+//		for (int i = 0; i < scoreForEach.size(); i++) {
+//			score = (scoreForEach.get(i) + scoreForEach2.get(i)) / 2;			// 2 prompts
+//			System.out.println("Score for " + students.get(i).getName() + ": " + score);
+//		}
+//		
+//		System.exit(0);
 	}
 	
 	public static void addStudents() {
