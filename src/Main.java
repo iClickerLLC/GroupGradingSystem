@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.*;
@@ -35,6 +34,7 @@ public class Main {
 			} else if (input == JOptionPane.NO_OPTION) {
 				
 				login();
+				break;
 				
 			} else if (input == JOptionPane.CLOSED_OPTION) {
 				System.exit(0);  
