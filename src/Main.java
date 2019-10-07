@@ -43,37 +43,37 @@ public class Main {
 		}
 		
 		
-//		// This is a test push
-//		
-//		// Instructor sets parameters by adding students to the group and setting the number of assignments
-//		addStudents();
-//		
-//		// Notify instructor of project creation
-//		JOptionPane.showMessageDialog(null, "The group project has been created");
-//		
-//		// Notify students of group project creation
-//		notifyStudents();
-//		
-//		// Prompt students for real-time feedback
-//		ArrayList<Double> scoreForEach = promptForFeedback(students);
-//		
-//		JOptionPane.showMessageDialog(null, "Prompting students for end-of-project feedback");
-//		
-//		System.out.println();
-//		
-//		// Prompt students for end-of-project feedback
-//		ArrayList<Double> scoreForEach2 = promptForFeedback(students);
-//		
-//		System.out.println();
-//		
-//		// Display final score for each student
-//		double score;
-//		for (int i = 0; i < scoreForEach.size(); i++) {
-//			score = (scoreForEach.get(i) + scoreForEach2.get(i)) / 2;			// 2 prompts
-//			System.out.println("Score for " + students.get(i).getName() + ": " + score);
-//		}
-//		
-//		System.exit(0);
+		// This is a test push
+		
+		// Instructor sets parameters by adding students to the group and setting the number of assignments
+		addStudents();
+		
+		// Notify instructor of project creation
+		JOptionPane.showMessageDialog(null, "The group project has been created");
+		
+		// Notify students of group project creation
+		notifyStudents();
+		
+		// Prompt students for real-time feedback
+		ArrayList<Double> scoreForEach = promptForFeedback(students);
+		
+		JOptionPane.showMessageDialog(null, "Prompting students for end-of-project feedback");
+		
+		System.out.println();
+		
+		// Prompt students for end-of-project feedback
+		ArrayList<Double> scoreForEach2 = promptForFeedback(students);
+		
+		System.out.println();
+		
+		// Display final score for each student
+		double score;
+		for (int i = 0; i < scoreForEach.size(); i++) {
+			score = (scoreForEach.get(i) + scoreForEach2.get(i)) / 2;			// 2 prompts
+			System.out.println("Score for " + students.get(i).getName() + ": " + score);
+		}
+		
+		System.exit(0);
 	}
 	
 	public static int welcome() {
