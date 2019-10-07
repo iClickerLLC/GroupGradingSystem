@@ -1,4 +1,7 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.*;
 
 public class Main {
@@ -8,6 +11,8 @@ public class Main {
 	private static int numberOfAssignments;
 	
 	public static void main(String[] args) {
+		
+		login();
 		
 		ArrayList<Login> logins = new ArrayList<>();
 		
@@ -110,6 +115,35 @@ public class Main {
 //		}
 //		
 //		System.exit(0);
+	}
+	
+
+	
+	public static Hashtable<String, String> login() {
+		
+		JFrame frame = new JFrame();
+	    Hashtable<String, String> logininformation = new Hashtable<String, String>();
+
+	    JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+	    JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+	    label.add(new JLabel("E-Mail", SwingConstants.RIGHT));
+	    label.add(new JLabel("Password", SwingConstants.RIGHT));
+	    panel.add(label, BorderLayout.WEST);
+
+	    JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+	    JTextField username = new JTextField();
+	    controls.add(username);
+	    JPasswordField password = new JPasswordField();
+	    controls.add(password);
+	    panel.add(controls, BorderLayout.CENTER);
+
+	    JOptionPane.showConfirmDialog(
+	            frame, panel, "login", JOptionPane.OK_CANCEL_OPTION);
+
+	    logininformation.put("user", username.getText());
+	    logininformation.put("pass", new String(password.getPassword()));
+	    return logininformation;
 	}
 	
 	public static void addStudents() {
