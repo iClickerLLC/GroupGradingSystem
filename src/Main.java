@@ -8,29 +8,21 @@ public class Main {
 //test add comment
 
 	private static ArrayList<Student> students = new ArrayList<>();
+	private static ArrayList<Login> logins = new ArrayList<>();
 	private static int numberOfAssignments;
 	
 	public static void main(String[] args) {
 		
-		login();
-		
-		ArrayList<Login> logins = new ArrayList<>();
-		
 		int input = 0;
 		int id = 0;
 		
-		while(input != 3) {
+		while(input != JOptionPane.CANCEL_OPTION) {
 			
-			input = Integer.parseInt(JOptionPane.showInputDialog("Enter 1 to create a new user or 2 to login. Enter 3 to exit."));
+			input = welcome();
 			
-			if (input == 1) {
+			if (input == JOptionPane.YES_OPTION) {
 				
-				String username = JOptionPane.showInputDialog("Enter a username");
-				String password = JOptionPane.showInputDialog("Enter a password");
-				Login login = new Login(id, username, password);
-				id++;
-				
-				logins.add(login);
+				id = createUser(id);
 				
 				for (int i = 0; i < logins.size(); i++) {
 					System.out.println(logins.get(i).getUsername());
@@ -40,48 +32,15 @@ public class Main {
 				}
 
 				
-			} else if (input == 2) {
+			} else if (input == JOptionPane.NO_OPTION) {
 				
-				// Login
+				login();
 				
-				String temp2 = null;
-				Boolean found = false;
-				Boolean success = false;
-				
-				while (success == false) {
-					
-					String temp = JOptionPane.showInputDialog("Enter your username to logjn");
-					
-					for (int i = 0; i < logins.size(); i++) {
-						if (temp.compareToIgnoreCase(logins.get(i).getUsername()) == 0) {
-							found = true;
-							temp2 = logins.get(i).getPassword();
-						} 
-					}
-					
-					if (found) {
-						String temp3 = JOptionPane.showInputDialog("Enter you password");
-						if (temp3.compareTo(temp2) == 0) {
-							JOptionPane.showMessageDialog(null, "You have logged in");
-							success = true;
-						} else {
-							JOptionPane.showMessageDialog(null, "Wrong password!");
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Username not found");
-					}
-					
-				}
-				
+			} else if (input == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);  
 			}
-			
+	
 		}
-		
-		
-		
-
-		
-		
 		
 		
 //		// This is a test push
@@ -117,12 +76,80 @@ public class Main {
 //		System.exit(0);
 	}
 	
+	public static int welcome() {
+		
+        Object[] options1 = { "Create User", "Login", "Quit" };
 
+    	JPanel panel = new JPanel();
+        panel.add(new JLabel("Welcome to the GGS™"));
+    	
+    	int result = JOptionPane.showOptionDialog(null, panel, "Welcome",
+        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options1, null);
+    	
+    	return result;
+		
+	}
 	
-	public static Hashtable<String, String> login() {
+	public static void login() {
 		
 		JFrame frame = new JFrame();
-	    Hashtable<String, String> logininformation = new Hashtable<String, String>();
+
+	    JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+	    JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+	    label.add(new JLabel("E-Mail", SwingConstants.RIGHT));
+	    label.add(new JLabel("Password", SwingConstants.RIGHT));
+	    panel.add(label, BorderLayout.WEST);
+
+	    JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+	    JTextField username = new JTextField();
+	    controls.add(username);
+	    JPasswordField password = new JPasswordField();
+	    controls.add(password);
+	    panel.add(controls, BorderLayout.CENTER);
+
+		String temp2 = null;
+		Boolean found = false;
+		Boolean success = false;
+		
+		while (success == false) {
+			
+		    int result = JOptionPane.showConfirmDialog(frame, panel, "Login", JOptionPane.OK_CANCEL_OPTION);
+			
+		    if(result == JOptionPane.OK_OPTION) {
+		    	
+				String user = username.getText();
+				String pass = new String(password.getPassword());
+				
+				for (int i = 0; i < logins.size(); i++) {
+					if (user.compareToIgnoreCase(logins.get(i).getUsername()) == 0) {
+						found = true;
+						temp2 = logins.get(i).getPassword();
+					} 
+				}
+				
+				if (found) {
+					if (pass.compareTo(temp2) == 0) {
+						JOptionPane.showMessageDialog(null, "You have logged in");
+						success = true;
+					} else {
+						JOptionPane.showMessageDialog(null, "Wrong password!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Username not found");
+				}
+		    } else if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION){
+		    	success = true;		// break out of while loop
+		    }
+		    
+		}
+	    
+		
+	}
+	
+	public static int createUser(int id) {
+		
+		JFrame frame = new JFrame();
 
 	    JPanel panel = new JPanel(new BorderLayout(5, 5));
 
@@ -139,11 +166,16 @@ public class Main {
 	    panel.add(controls, BorderLayout.CENTER);
 
 	    JOptionPane.showConfirmDialog(
-	            frame, panel, "login", JOptionPane.OK_CANCEL_OPTION);
-
-	    logininformation.put("user", username.getText());
-	    logininformation.put("pass", new String(password.getPassword()));
-	    return logininformation;
+	            frame, panel, "Create New User", JOptionPane.OK_CANCEL_OPTION);
+		
+		String user = username.getText();
+		String pass = new String(password.getPassword());
+		
+		Login login = new Login(id, user, pass);
+		logins.add(login);
+	    
+		id++;
+	    return id;
 	}
 	
 	public static void addStudents() {
